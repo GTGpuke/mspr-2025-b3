@@ -26,8 +26,8 @@ La POC se concentre sur un secteur géographique restreint et combine des donné
 
 - **Dossier [Datas_Warehouse](Datas_Warehouse/)** :
     - Contient 3 fichiers : 
-        - Un fichier python (**[load_datawarehouse.py](Data_Warehouse\load_datawarehouse.py)**) qui lance un script pour initialiser le DW et y insérer les données finales
-        - Un script sql (**[script_init_datawarehouse.sql](Data_Warehouse\script_init_datawarehouse.sql)**) pour construire la bdd
+        - Un fichier python (**[load_datawarehouse.py](Data_Warehouse/load_datawarehouse.py)**) qui lance un script pour initialiser le DW et y insérer les données finales
+        - Un script sql (**[script_init_datawarehouse.sql](Data_Warehouse/script_init_datawarehouse.sql)**) pour construire la bdd
         - le dataset final résultant de l'ETL
 
 <br>
