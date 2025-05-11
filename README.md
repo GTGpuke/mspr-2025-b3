@@ -2,7 +2,7 @@
 <h1 align="center"> MSPR</h1>
 <h1 align="center"> « Big Data et Analyse de données » </h1>
 
-![alt text](Documents\Images\AI.jpg)
+![alt text](Documents/Images/AI.jpg)
 
 ---
 
