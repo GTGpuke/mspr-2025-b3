@@ -70,12 +70,22 @@ pip install pandas openpyxl mysql-connector-python
 Le fichier [***script_init_datawarehouse.sql***](script_init_datawarehouse.sql) contient :
 
 - La création de la base de données ***datawarehouse_pres***
+<br>
+- La création de 3 tables de dimenssion :
+    - ***dim_temps***
+    - ***dim_region***
+    - ***dim_societe***
+    <br>
+- La création de 3 tables de fait 
+    - ***fait_election_presidentielle***
+    - ***fait_election_legislative***
+    - ***fait_election_municipale***
 
-- La création des 4 tables (***dim_temps, dim_region, dim_societe, fait_election_regionale***) possédant les relations de ***clés étrangères*** (avec InnoDB)
- 
+Les tables possédent des relations de ***clés étrangères*** (avec ***InnoDB***)
 
 Toutes les tables sont liées par des relations typiques d’un schéma en étoile.
 
+<br>
 
 ##### 2. Le script Python 
 
@@ -91,6 +101,7 @@ Le script [***load_datawarehouse.py***](load_datawarehouse.py) :
 
 5. Gère les relations via des clés étrangères
 
+<br>
 
 ##### 3. Lancer le le script :
 
