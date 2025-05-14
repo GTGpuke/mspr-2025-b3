@@ -2,7 +2,7 @@ import pandas as pd
 from fuzzywuzzy import process
 
 # 1. Charger le fichier
-df = pd.read_excel("F- TAUX-CHOMAGE_ans_departement.xlsx")
+df = pd.read_excel("Datas/Données critères/F- TAUX-CHOMAGE_ans_departement.xlsx")
 
 # 2. Nettoyer la colonne Région (colonne A)
 df.iloc[:, 0] = df.iloc[:, 0].str.replace("Taux de chômage localisé par région - ", "").str.strip()

@@ -2,7 +2,7 @@ import pandas as pd
 from fuzzywuzzy import process
 
 # 1. Charger le fichier Excel
-df = pd.read_excel("E- PIB_regionaux_1990-2022.xlsx")
+df = pd.read_excel("Datas/Données critères/E-  PIB_regionaux_1990-2022.xlsx")
 
 # 2. Renommer les colonnes utiles
 df = df.rename(columns={
