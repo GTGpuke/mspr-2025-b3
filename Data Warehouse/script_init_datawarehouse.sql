@@ -34,8 +34,8 @@ CREATE TABLE dim_societe (
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
 
 -- TABLE DE FAITS : RÉSULTATS DES ÉLECTIONS
-DROP TABLE IF EXISTS fait_election_regionale;
-CREATE TABLE fait_election_regionale (
+DROP TABLE IF EXISTS fait_election_presidentielle;
+CREATE TABLE fait_election_presidentielle (
     id_fait INT AUTO_INCREMENT PRIMARY KEY,
     id_temps INT,
     id_region INT,
@@ -47,3 +47,36 @@ CREATE TABLE fait_election_regionale (
     FOREIGN KEY (id_region) REFERENCES dim_region(id_region),
     FOREIGN KEY (id_societe) REFERENCES dim_societe(id_societe)
 ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+
+-- TABLE DE FAITS : RÉSULTATS DES LÉGISLATIVES
+DROP TABLE IF EXISTS fait_election_legislative;
+CREATE TABLE IF NOT EXISTS fait_election_legislative (
+    id_fait_legislative INT AUTO_INCREMENT PRIMARY KEY,
+    id_temps INT,
+    id_region INT,
+    id_societe INT,
+    resultat VARCHAR(100),
+
+    FOREIGN KEY (id_temps) REFERENCES dim_temps(id_temps),
+    FOREIGN KEY (id_region) REFERENCES dim_region(id_region),
+    FOREIGN KEY (id_societe) REFERENCES dim_societe(id_societe)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+
+
+-- TABLE DE FAITS : RÉSULTATS DES MUNICIPALES
+DROP TABLE IF EXISTS fait_election_municipale;
+CREATE TABLE IF NOT EXISTS fait_election_municipale (
+    id_fait_municipale INT AUTO_INCREMENT PRIMARY KEY,
+    id_temps INT,
+    id_region INT,
+    id_societe INT,
+    resultat VARCHAR(100),
+
+    FOREIGN KEY (id_temps) REFERENCES dim_temps(id_temps),
+    FOREIGN KEY (id_region) REFERENCES dim_region(id_region),
+    FOREIGN KEY (id_societe) REFERENCES dim_societe(id_societe)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4;
+
+ 
