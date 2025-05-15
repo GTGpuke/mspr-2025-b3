@@ -47,11 +47,11 @@ prediction_df = pd.DataFrame({
     "Probabilité Droite": proba_2024
 })
 
-print("📊 Prédictions pour les élections 2024 :")
+print("Prédictions pour les élections 2024 :")
 print(prediction_df)
 
 # 6. Évaluation avec validation croisée
-print("\n📈 Évaluation du modèle (validation croisée 5-fold) :")
+print("\n Évaluation du modèle (validation croisée 5-fold) :")
 y_pred_cv = cross_val_predict(model, X, y, cv=5)
 
 # Rapport complet
