@@ -1,13 +1,11 @@
 import pandas as pd
-import numpy as np
-import tensorflow as tf
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import LabelEncoder
 from collections import Counter
+import joblib
+import os
 
-# Définition de l’année cible pour la prédiction
-ANNEE_CIBLE = 2022
+ANNEE_CIBLE = 2007
 
-# Liste des variables explicatives utilisées pour la prédiction
 features = [
     "3- Part de retraité (%)",
     "4- Part d'étudiant (%)",
@@ -17,43 +15,35 @@ features = [
     "10- Part de la population en zone rurale (%)"
 ]
 
-# Chargement des données correspondant à l'année ciblée
+# Chargement des données pour l'année cible
 df = pd.read_excel("dataset_final.xlsx", sheet_name="Données élections")
 df = df[df["année"] == ANNEE_CIBLE].copy()
 
-# Vérification de la disponibilité des données pour l’année spécifiée
 if df.empty:
     print(f"Aucune donnée trouvée pour l'année {ANNEE_CIBLE}.")
     exit()
 
-# Préparation du label encoder à partir des données historiques contenant les résultats
-df_all = pd.read_excel("dataset_final.xlsx", sheet_name="Données élections")
-df_all = df_all[df_all["résultat élection"].notna()]
-df_all["résultat élection"] = df_all["résultat élection"].str.lower()
+# Chargement du modèle + label encoder sauvegardés
+model_path = "modele_global_rf.joblib"
+if not os.path.exists(model_path):
+    print(f"Modèle non trouvé à {model_path}. Entraîne-le d'abord.")
+    exit()
 
-label_encoder = LabelEncoder()
-label_encoder.fit(df_all["résultat élection"])
+saved_objects = joblib.load(model_path)
+model = saved_objects["model"]
+label_encoder = saved_objects["label_encoder"]
 
-# Normalisation des données selon les caractéristiques du jeu d’entraînement
-scaler = StandardScaler()
-X_all = df_all[features]
-scaler.fit(X_all)
-
-# Prétraitement des données de l'année cible
+# Préparation des features (pas de scaler nécessaire pour Random Forest)
 X_predict = df[features]
-X_predict_scaled = scaler.transform(X_predict)
 
-# Chargement du modèle entraîné
-model = tf.keras.models.load_model("modele_global.h5")
+# Prédiction (classe)
+y_pred = model.predict(X_predict)
 
-# Génération des prédictions sur les données de l'année cible
-y_pred_prob = model.predict(X_predict_scaled).flatten()
-y_pred_bin = (y_pred_prob > 0.5).astype(int)
-y_pred_labels = label_encoder.inverse_transform(y_pred_bin)
+# Décodage des labels
+y_pred_labels = label_encoder.inverse_transform(y_pred)
 
-# Agrégation des prédictions pour identifier le camp politique majoritaire
+# Comptage des prédictions
 compte = Counter(y_pred_labels)
 vainqueur = compte.most_common(1)[0][0]
 
-# Affichage du résultat prédit
 print(f"\nPour l'année {ANNEE_CIBLE}, le modèle prédit une victoire de : {vainqueur.upper()}")

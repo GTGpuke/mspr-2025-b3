@@ -47,7 +47,7 @@ prediction_df = pd.DataFrame({
     "Probabilité Droite": proba_2024
 })
 
-print("Prédictions pour les élections 2024 :")
+print("Prédictions pour les élections 2022 :")
 print(prediction_df)
 
 # 6. Évaluation avec validation croisée
